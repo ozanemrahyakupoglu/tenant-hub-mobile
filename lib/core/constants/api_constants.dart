@@ -4,7 +4,7 @@ class ApiConstants {
   ApiConstants._();
 
   static String get baseUrl {
-    if (kIsWeb) return 'http://localhost:8080/api/v1';
+    if (kIsWeb) return 'http://46.225.97.71:8080/api/v1';
     if (defaultTargetPlatform == TargetPlatform.android) {
       return 'http://10.0.2.2:8080/api/v1';
     }

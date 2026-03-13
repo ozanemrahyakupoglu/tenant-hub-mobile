@@ -1,6 +1,7 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tenant_hub_mobile/core/constants/api_constants.dart';
 import 'package:tenant_hub_mobile/core/network/api_exceptions.dart';
@@ -26,9 +27,11 @@ class DioClient {
       receiveTimeout: const Duration(seconds: 15),
     ));
 
-    // Cookie manager for httpOnly refresh token
+    // Cookie manager for httpOnly refresh token (not needed on web, browser handles cookies)
     final cookieJar = CookieJar();
-    dio.interceptors.add(CookieManager(cookieJar));
+    if (!kIsWeb) {
+      dio.interceptors.add(CookieManager(cookieJar));
+    }
 
     // Auth interceptor
     dio.interceptors.add(InterceptorsWrapper(
@@ -49,7 +52,7 @@ class DioClient {
               baseUrl: ApiConstants.baseUrl,
               contentType: 'application/json',
             ));
-            refreshDio.interceptors.add(CookieManager(cookieJar));
+            if (!kIsWeb) refreshDio.interceptors.add(CookieManager(cookieJar));
 
             final response = await refreshDio.post(ApiConstants.refresh);
             final newToken = response.data['accessToken'] as String;
