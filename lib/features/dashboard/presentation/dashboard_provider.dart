@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tenant_hub_mobile/core/network/dio_client.dart';
 import 'package:tenant_hub_mobile/core/constants/api_constants.dart';
+import 'package:tenant_hub_mobile/features/auth/presentation/auth_provider.dart';
 
 class DashboardStats {
   final int realEstates;
@@ -21,6 +22,9 @@ class DashboardStats {
 }
 
 final dashboardStatsProvider = FutureProvider.autoDispose<DashboardStats>((ref) async {
+  // Refresh provider when auth state changes (login/logout)
+  ref.watch(authProvider);
+
   final dio = ref.watch(dioProvider);
 
   final response = await dio.get(ApiConstants.dashboardStats);
