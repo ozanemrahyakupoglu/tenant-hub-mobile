@@ -22,8 +22,15 @@ class DashboardStats {
 }
 
 final dashboardStatsProvider = FutureProvider.autoDispose<DashboardStats>((ref) async {
-  // Refresh provider when auth state changes (login/logout)
-  ref.watch(authProvider);
+  // Use select to watch only the user value, not the loading state.
+  // Without select, authProvider.loading (set at login start) also triggers this
+  // provider before the token is saved → 403. With select, only null→user
+  // transition triggers a rebuild (null→null is equal, so loading state is ignored).
+  final user = ref.watch(authProvider.select((s) => s.valueOrNull));
+
+  if (user == null) {
+    throw Exception('Not authenticated');
+  }
 
   final dio = ref.watch(dioProvider);
 
