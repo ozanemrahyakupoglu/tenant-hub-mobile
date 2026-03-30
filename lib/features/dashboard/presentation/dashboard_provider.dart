@@ -7,12 +7,16 @@ class DashboardStats {
   final int users;
   final int rents;
   final int payments;
+  final int rentedRealEstates;
+  final int vacantRealEstates;
 
   const DashboardStats({
     required this.realEstates,
     required this.users,
     required this.rents,
     required this.payments,
+    required this.rentedRealEstates,
+    required this.vacantRealEstates,
   });
 }
 
@@ -26,5 +30,7 @@ final dashboardStatsProvider = FutureProvider.autoDispose<DashboardStats>((ref) 
     users: response.data['totalUsers'] as int,
     rents: response.data['totalRents'] as int,
     payments: response.data['totalPayments'] as int,
+    rentedRealEstates: response.data['rentedRealEstates'] as int,
+    vacantRealEstates: response.data['vacantRealEstates'] as int,
   );
 });
