@@ -35,4 +35,7 @@ class ApiConstants {
 
   // Payments
   static const String payments = '/payments';
+
+  // Dashboard
+  static const String dashboardStats = '/dashboard/stats';
 }
