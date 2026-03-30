@@ -9,7 +9,7 @@ class DashboardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authProvider).valueOrNull;
+    final username = ref.watch(authProvider.select((s) => s.valueOrNull?.username));
     final stats = ref.watch(dashboardStatsProvider);
 
     return RefreshIndicator(
@@ -21,7 +21,7 @@ class DashboardPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hoş geldiniz, ${user?.username ?? ''}',
+              'Hoş geldiniz, ${username ?? ''}',
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
