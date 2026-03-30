@@ -16,7 +16,7 @@ class DashboardStats {
   });
 }
 
-final dashboardStatsProvider = FutureProvider<DashboardStats>((ref) async {
+final dashboardStatsProvider = FutureProvider.autoDispose<DashboardStats>((ref) async {
   final dio = ref.watch(dioProvider);
 
   final response = await dio.get(ApiConstants.dashboardStats);
