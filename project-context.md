@@ -86,6 +86,7 @@ Yetkilendirme **JWT tabanlı RBAC** ile sağlanır. JWT payload'ındaki `roles[]
 | json_serializable | ^6.9.4 | JSON serialization |
 | Dio | ^5.7.0 | HTTP client |
 | dio_cookie_manager | ^3.1.1 | Cookie yönetimi (refresh token) |
+| cookie_jar | ^4.0.8 | Cookie storage (dio_cookie_manager bağımlılığı) |
 | GoRouter | ^14.8.1 | Declarative routing |
 | flutter_secure_storage | ^9.2.4 | JWT token güvenli saklama |
 | jwt_decoder | ^2.0.1 | JWT payload parse |
@@ -120,7 +121,7 @@ lib/
 │   ├── payments/                    # CRUD
 │   ├── dashboard/                   # Özet istatistik kartları
 │   ├── tenants/                     # Placeholder
-│   └── settings/                    # Placeholder
+│   └── settings/                    # Kullanıcı profili, uygulama bilgisi, çıkış yap
 └── shared/
     ├── models/
     │   └── page_response.dart       # Generic PageResponse<T>
@@ -174,12 +175,12 @@ PermissionGuard(permission: 'RESOURCE_CREATE', child: FloatingActionButton(...))
 | Modül | Durum | Açıklama |
 |---|---|---|
 | Auth (Login/Logout) | ✅ Tamamlandı | JWT login, httpOnly refresh cookie, token yenileme interceptor |
-| Dashboard | ✅ Tamamlandı | Gayrimenkul, kullanıcı, kiralama, ödeme toplam sayıları |
+| Dashboard | ✅ Tamamlandı | 6 istatistik kartı: toplam gayrimenkul, kullanıcı, kiralama, ödeme + kiraya verilmiş / boş gayrimenkul |
 | Kullanıcılar | ✅ Tamamlandı | CRUD + User-Role BottomSheet + izin koşullu butonlar |
 | Roller | ✅ Tamamlandı | CRUD + Role-Permission BottomSheet + izin koşullu butonlar |
 | Yetkiler | ✅ Tamamlandı | CRUD + izin koşullu butonlar |
 | Gayrimenkuller | ✅ Tamamlandı | CRUD + kiracı/ev sahibi seçimi + izin koşullu butonlar |
-| Kiralama | ✅ Tamamlandı | CRUD + gayrimenkul seçimi + para birimi + izin koşullu butonlar |
+| Kiralama | ✅ Tamamlandı | CRUD + gayrimenkul seçimi + para birimi + zam oranı (increaseRate) + son ödeme tarihi (paymentDueDate) + not (note) + izin koşullu butonlar |
 | Ödemeler | ✅ Tamamlandı | CRUD + kiralama seçimi + para birimi + izin koşullu butonlar |
 | Kiracılar | 🔲 Placeholder | Henüz geliştirilmedi |
-| Ayarlar | 🔲 Placeholder | Henüz geliştirilmedi |
+| Ayarlar | ✅ Tamamlandı | Kullanıcı profili kartı (username, initials, rol/yetki sayısı) + uygulama bilgisi + çıkış yap |
