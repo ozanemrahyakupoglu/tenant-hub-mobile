@@ -192,6 +192,7 @@ class RentsPage extends ConsumerWidget {
     final increaseRateCtrl = TextEditingController(
       text: rent?.increaseRate != null ? rent!.increaseRate!.toString() : '',
     );
+    final noteCtrl = TextEditingController(text: rent?.note);
     String currency = rent?.currency ?? 'TRY';
     DateTime selectedDate = rent != null ? DateTime.parse(rent.rentDate) : DateTime.now();
     DateTime selectedPaymentDueDate = rent != null ? DateTime.parse(rent.paymentDueDate) : DateTime.now();
@@ -290,6 +291,21 @@ class RentsPage extends ConsumerWidget {
                         return null;
                       },
                     ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: noteCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Not (Opsiyonel)',
+                        hintText: 'Maksimum 1000 karakter',
+                        alignLabelWithHint: true,
+                      ),
+                      maxLines: 3,
+                      validator: (v) {
+                        if (v == null || v.trim().isEmpty) return null;
+                        if (v.trim().length > 1000) return 'Not en fazla 1000 karakter olabilir';
+                        return null;
+                      },
+                    ),
                     const SizedBox(height: 24),
                     FilledButton(
                       onPressed: () async {
@@ -302,6 +318,7 @@ class RentsPage extends ConsumerWidget {
                           currency: currency,
                           increaseRate: increaseRateText.isNotEmpty ? double.parse(increaseRateText) : null,
                           paymentDueDate: DateFormat('yyyy-MM-dd').format(selectedPaymentDueDate),
+                          note: noteCtrl.text.trim().isNotEmpty ? noteCtrl.text.trim() : null,
                         );
                         try {
                           if (rent != null) {

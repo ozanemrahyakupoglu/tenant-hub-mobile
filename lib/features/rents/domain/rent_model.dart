@@ -17,6 +17,7 @@ class Rent with _$Rent {
     required String status,
     required String createdDate,
     required String createdBy,
+    String? note,
   }) = _Rent;
 
   factory Rent.fromJson(Map<String, dynamic> json) => _$RentFromJson(json);
@@ -31,6 +32,7 @@ class RentRequest with _$RentRequest {
     required String currency,
     double? increaseRate,
     required String paymentDueDate,
+    String? note,
   }) = _RentRequest;
 
   factory RentRequest.fromJson(Map<String, dynamic> json) =>
