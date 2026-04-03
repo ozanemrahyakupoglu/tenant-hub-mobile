@@ -117,6 +117,23 @@ class RealEstatesPage extends ConsumerWidget {
                                         ],
                                       ),
                                     ),
+                                  if (re.note != null)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Icon(Icons.notes_outlined, size: 14, color: AppColors.textSecondary),
+                                          const SizedBox(width: 4),
+                                          Expanded(
+                                            child: Text(
+                                              re.note!,
+                                              style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   if (canUpdate || canDelete) ...[
                                     const Divider(height: 20),
                                     Row(
@@ -211,6 +228,7 @@ class RealEstatesPage extends ConsumerWidget {
     final districtCtrl = TextEditingController(text: realEstate?.district);
     final neighborhoodCtrl = TextEditingController(text: realEstate?.neighborhood);
     final addressCtrl = TextEditingController(text: realEstate?.address);
+    final noteCtrl = TextEditingController(text: realEstate?.note);
     final formKey = GlobalKey<FormState>();
 
     showModalBottomSheet(
@@ -260,6 +278,13 @@ class RealEstatesPage extends ConsumerWidget {
                   const SizedBox(height: 12),
                   TextFormField(controller: addressCtrl, decoration: const InputDecoration(labelText: 'Adres'), maxLines: 2,
                       validator: (v) => (v == null || v.trim().isEmpty) ? 'Zorunlu' : null),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    controller: noteCtrl,
+                    decoration: const InputDecoration(labelText: 'Not'),
+                    maxLines: 3,
+                    maxLength: 1000,
+                  ),
                   const SizedBox(height: 24),
                   FilledButton(
                     onPressed: () async {
@@ -272,6 +297,7 @@ class RealEstatesPage extends ConsumerWidget {
                         district: districtCtrl.text.trim(),
                         neighborhood: neighborhoodCtrl.text.trim(),
                         address: addressCtrl.text.trim(),
+                        note: noteCtrl.text.trim().isEmpty ? null : noteCtrl.text.trim(),
                       );
                       try {
                         if (realEstate != null) {

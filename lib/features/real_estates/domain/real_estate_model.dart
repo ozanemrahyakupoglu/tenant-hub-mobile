@@ -21,6 +21,7 @@ class RealEstate with _$RealEstate {
     required String status,
     required String createdDate,
     required String createdBy,
+    String? note,
   }) = _RealEstate;
 
   factory RealEstate.fromJson(Map<String, dynamic> json) =>
@@ -39,6 +40,7 @@ class RealEstateRequest with _$RealEstateRequest {
     required String address,
     int? tenantId,
     int? landlordId,
+    String? note,
   }) = _RealEstateRequest;
 
   factory RealEstateRequest.fromJson(Map<String, dynamic> json) =>
