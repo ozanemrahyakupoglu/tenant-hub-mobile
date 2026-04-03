@@ -8,6 +8,7 @@ class Tenant with _$Tenant {
   const factory Tenant({
     required int id,
     required int usersId,
+    String? usersFullName,
     String? username,
     String? firstName,
     String? lastName,

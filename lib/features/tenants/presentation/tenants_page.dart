@@ -207,6 +207,9 @@ class TenantsPage extends ConsumerWidget {
   }
 
   String _buildDisplayName(Tenant tenant) {
+    if (tenant.usersFullName != null && tenant.usersFullName!.isNotEmpty) {
+      return tenant.usersFullName!;
+    }
     final firstName = tenant.firstName ?? '';
     final lastName = tenant.lastName ?? '';
     final fullName = '$firstName $lastName'.trim();
