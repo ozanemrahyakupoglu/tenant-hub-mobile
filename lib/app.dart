@@ -11,6 +11,7 @@ import 'package:tenant_hub_mobile/features/real_estates/presentation/real_estate
 import 'package:tenant_hub_mobile/features/rents/presentation/rents_page.dart';
 import 'package:tenant_hub_mobile/features/roles/presentation/roles_page.dart';
 import 'package:tenant_hub_mobile/features/settings/presentation/settings_page.dart';
+import 'package:tenant_hub_mobile/features/landlords/presentation/landlords_page.dart';
 import 'package:tenant_hub_mobile/features/tenants/presentation/tenants_page.dart';
 import 'package:tenant_hub_mobile/features/users/presentation/users_page.dart';
 import 'package:tenant_hub_mobile/shared/widgets/app_drawer.dart';
@@ -48,6 +49,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(path: '/rents', builder: (_, __) => const RentsPage()),
           GoRoute(path: '/payments', builder: (_, __) => const PaymentsPage()),
           GoRoute(path: '/tenants', builder: (_, __) => const TenantsPage()),
+          GoRoute(path: '/landlords', builder: (_, __) => const LandlordsPage()),
           GoRoute(path: '/settings', builder: (_, __) => const SettingsPage()),
         ],
       ),

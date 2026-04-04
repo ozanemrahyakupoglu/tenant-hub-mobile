@@ -56,6 +56,11 @@ const _allMenuItems = [
       icon: Icons.group_outlined,
       label: 'Kiracılar',
       requiredPermission: PermissionKeys.tenantRead),
+  _MenuItem(
+      path: '/landlords',
+      icon: Icons.home_work_outlined,
+      label: 'Ev Sahipleri',
+      requiredPermission: PermissionKeys.landlordRead),
   _MenuItem(path: '/settings', icon: Icons.settings_outlined, label: 'Ayarlar'),
 ];
 
