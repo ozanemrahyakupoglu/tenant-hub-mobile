@@ -11,6 +11,7 @@ COPY . .
 
 RUN dart run build_runner build --delete-conflicting-outputs
 RUN flutter build web --release
+RUN sed -i "s|flutter_bootstrap.js\"|flutter_bootstrap.js?v=$(date +%s)\"|g" /app/build/web/index.html
 
 # ---- Runtime Stage ----
 FROM nginx:alpine AS runtime
