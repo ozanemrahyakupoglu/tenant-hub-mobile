@@ -93,6 +93,18 @@ class DashboardPage extends ConsumerWidget {
         icon: Icons.home_work_outlined,
         gradientColors: const [Color(0xFFF59E0B), Color(0xFFD97706)],
       ),
+      _StatCard(
+        title: 'Kiracılar',
+        value: data.tenants,
+        icon: Icons.person_pin_outlined,
+        gradientColors: const [Color(0xFF6366F1), Color(0xFF4F46E5)],
+      ),
+      _StatCard(
+        title: 'Ev Sahipleri',
+        value: data.landlords,
+        icon: Icons.house_outlined,
+        gradientColors: const [Color(0xFFEC4899), Color(0xFFDB2777)],
+      ),
     ];
 
     return GridView.builder(
