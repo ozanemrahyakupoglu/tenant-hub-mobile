@@ -14,6 +14,7 @@ class Payment with _$Payment {
     required String status,
     required String createdDate,
     required String createdBy,
+    String? note,
   }) = _Payment;
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
@@ -27,6 +28,7 @@ class PaymentRequest with _$PaymentRequest {
     required double amount,
     required String currency,
     required String paymentDate,
+    String? note,
   }) = _PaymentRequest;
 
   factory PaymentRequest.fromJson(Map<String, dynamic> json) =>

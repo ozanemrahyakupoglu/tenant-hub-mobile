@@ -124,6 +124,23 @@ class PaymentsPage extends ConsumerWidget {
                                       ),
                                     ],
                                   ),
+                                  if (payment.note != null && payment.note!.isNotEmpty) ...[
+                                    const SizedBox(height: 6),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Icon(Icons.notes_outlined,
+                                            size: 14, color: AppColors.textSecondary),
+                                        const SizedBox(width: 4),
+                                        Expanded(
+                                          child: Text(
+                                            payment.note!,
+                                            style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                   if (canUpdate || canDelete) ...[
                                     const Divider(height: 20),
                                     Row(
@@ -190,6 +207,7 @@ class PaymentsPage extends ConsumerWidget {
   void _showFormDialog(BuildContext context, WidgetRef ref, {Payment? payment}) {
     final rentIdCtrl = TextEditingController(text: payment?.rentId.toString());
     final amountCtrl = TextEditingController(text: payment?.amount.toString());
+    final noteCtrl = TextEditingController(text: payment?.note);
     String currency = payment?.currency ?? 'TRY';
     DateTime selectedDate = payment != null ? _parseDateString(payment.paymentDate) : DateTime.now();
     final formKey = GlobalKey<FormState>();
@@ -254,6 +272,14 @@ class PaymentsPage extends ConsumerWidget {
                       ],
                       onChanged: (v) => setModalState(() => currency = v!),
                     ),
+                    const SizedBox(height: 12),
+                    TextFormField(
+                      controller: noteCtrl,
+                      decoration: const InputDecoration(labelText: 'Not'),
+                      maxLength: 1000,
+                      maxLines: 3,
+                      keyboardType: TextInputType.multiline,
+                    ),
                     const SizedBox(height: 24),
                     FilledButton(
                       onPressed: () async {
@@ -263,6 +289,7 @@ class PaymentsPage extends ConsumerWidget {
                           amount: double.parse(amountCtrl.text.trim()),
                           currency: currency,
                           paymentDate: DateFormat('yyyyMMddHHmmss').format(selectedDate),
+                          note: noteCtrl.text.trim().isEmpty ? null : noteCtrl.text.trim(),
                         );
                         try {
                           if (payment != null) {
